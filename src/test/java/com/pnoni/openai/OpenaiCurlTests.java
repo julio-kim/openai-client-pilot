@@ -25,7 +25,7 @@ class OpenaiCurlTests {
 		ResponseEntity<String> responseEntity = restTemplate.exchange(
 				openaiApiUrl,
 				HttpMethod.POST,
-				new HttpEntity<>(getPromptBody(), headers),
+				new HttpEntity<>(createChatCompletion(), headers),
 				String.class
 		);
 
@@ -33,7 +33,7 @@ class OpenaiCurlTests {
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 	}
 
-	String getPromptBody() {
+	String createChatCompletion() {
 		return """
 			{
 				"model": "gpt-3.5-turbo",
@@ -52,5 +52,4 @@ class OpenaiCurlTests {
 			}
 			""";
 	}
-
 }
